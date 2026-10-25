@@ -22,3 +22,7 @@ It is a static page, served by Nginx from my own Raspberry Pi 5.
 ## Editing
 
 Content lives in `index.html` and styles in `style.css`. Colors are defined as CSS custom properties: the light palette in `:root`, the dark one in the `prefers-color-scheme: dark` block and in `:root[data-theme="dark"]`, so the theme can be changed in one place.
+
+## License
+ 
+The code is released under the GNU General Public License v3.0 License (see `LICENSE`). The personal content (the text about me and `cv.pdf`) is not covered by it.
