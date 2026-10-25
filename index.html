@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Artem Barkov</title>
+<meta name="description" content="Computer engineering student in Bari. Linux, networking and self-hosting.">
+<style>
+  /* Rosé Pine (dark) and Rosé Pine Dawn (light) */
+  :root {
+    --base: #faf4ed;
+    --surface: #fffaf3;
+    --overlay: #f2e9e1;
+    --text: #575279;
+    --muted: #797593;
+    --line: #dfdad9;
+    --iris: #907aa9;
+    --foam: #56949f;
+    --pine: #286983;
+    --gold: #ea9d34;
+    --love: #b4637a;
+    --mono: "JetBrains Mono", "Iosevka", "Fira Code", ui-monospace, "DejaVu Sans Mono", monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", "Noto Sans", "DejaVu Sans", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --base: #191724;
+      --surface: #1f1d2e;
+      --overlay: #26233a;
+      --text: #e0def4;
+      --muted: #908caa;
+      --line: #403d52;
+      --iris: #c4a7e7;
+      --foam: #9ccfd8;
+      --pine: #31748f;
+      --gold: #f6c177;
+      --love: #eb6f92;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--base);
+    color: var(--text);
+    font: 17px/1.6 var(--sans);
+  }
+  main {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: 4.5rem 1rem 3rem;
+  }
+  a { color: var(--foam); text-underline-offset: 0.2em; }
+  a:hover { color: var(--iris); }
+  a:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 2px; }
+
+  h1, h2, h3 { font-family: var(--mono); font-weight: 600; line-height: 1.25; }
+  h1 { font-size: clamp(2.2rem, 7vw, 3.4rem); letter-spacing: -0.02em; margin: 0 0 0.75rem; }
+  h1 .prompt { color: var(--iris); font-weight: 400; }
+  h2 { font-size: 1.25rem; margin: 3.5rem 0 1rem; }
+  h3 { font-size: 1rem; margin: 1.75rem 0 0.4rem; }
+  p { margin: 0 0 1rem; max-width: 66ch; }
+
+  .intro { font-size: 1.15rem; color: var(--text); max-width: 60ch; }
+  .contacts { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; padding: 0; margin: 1.5rem 0 0; list-style: none; font-family: var(--mono); font-size: 0.95rem; }
+
+  /* The request path: the one bold element of the page */
+  .path {
+    margin: 1.5rem 0 1rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    font-family: var(--mono);
+    font-size: 0.85rem;
+  }
+  .lanes { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .lane h3 { margin: 0 0 0.75rem; font-size: 0.9rem; color: var(--muted); font-weight: 400; }
+  .lane ol { list-style: none; margin: 0; padding: 0; }
+  .lane li {
+    position: relative;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent, var(--foam));
+    border-radius: 6px;
+    background: var(--base);
+  }
+  .lane li + li { margin-top: 1.1rem; }
+  .lane li + li::before {
+    content: "";
+    position: absolute;
+    left: 1.25rem;
+    top: calc(-1.1rem - 1px);
+    height: 1.1rem;
+    border-left: 2px dotted var(--muted);
+  }
+  .lane li small { display: block; color: var(--muted); font-size: 0.78rem; }
+  .public { --accent: var(--foam); }
+  .admin { --accent: var(--iris); }
+  .services { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.4rem; }
+  .services span { padding: 0.1rem 0.45rem; border-radius: 4px; background: var(--overlay); font-size: 0.78rem; }
+  .host {
+    margin-top: 1.25rem;
+    padding: 0.75rem;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+    background: var(--base);
+  }
+  .host strong { font-weight: 600; }
+  .host small { display: block; color: var(--muted); font-size: 0.78rem; margin-top: 0.2rem; }
+
+  .notes { padding-left: 1.2rem; margin: 0 0 1rem; max-width: 66ch; }
+  .notes li { margin-bottom: 0.4rem; }
+  .notes li::marker { color: var(--iris); }
+
+  dl { margin: 0; }
+  dt { font-family: var(--mono); font-weight: 600; margin-top: 1.25rem; }
+  dt .when { font-weight: 400; color: var(--muted); }
+  dd { margin: 0.2rem 0 0; max-width: 66ch; }
+
+  footer { margin-top: 4rem; padding-top: 1rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; }
+
+  @media (max-width: 600px) {
+    main { padding-top: 3rem; }
+    .lanes { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1><span class="prompt" aria-hidden="true">~/</span>Artem Barkov</h1>
+    <p class="intro">Computer engineering student at the Politecnico di Bari. I run my own Linux server at home and I'm looking for IT support or junior sysadmin work, full- or part-time, in Bari or remote.</p>
+    <ul class="contacts">
+      <li><a href="mailto:artem.barkov@tuta.com">artem.barkov@tuta.com</a></li>
+      <li><a href="https://www.linkedin.com/in/artem-barkov">LinkedIn</a></li>
+      <li><a href="https://github.com/xR1ckx0ne">GitHub</a></li>
+      <li><a href="cv.pdf">CV (PDF)</a></li>
+    </ul>
+  </header>
+
+  <section aria-labelledby="homelab">
+    <h2 id="homelab">The server behind this page</h2>
+    <p>Since 2019 I've run a small home server, now a Raspberry Pi 5 on Debian. It hosts the services I use every day and is the place where I learn system administration by doing it. This is how traffic reaches it.</p>
+
+    <figure class="path" aria-label="Diagram of how traffic reaches the home server">
+      <div class="lanes">
+        <div class="lane public">
+          <h3>Public web traffic</h3>
+          <ol>
+            <li>Browser on the internet</li>
+            <li>Personal domain<small>dynamic DNS keeps it pointed at my home connection</small></li>
+            <li>Firewall<small>ufw, only the web and VPN ports open</small></li>
+            <li>Nginx reverse proxy<small>HTTPS in front of every service</small>
+              <div class="services"><span>Nextcloud</span><span>Vaultwarden</span><span>Forgejo</span><span>SearXNG</span></div>
+            </li>
+          </ol>
+        </div>
+        <div class="lane admin">
+          <h3>My own devices</h3>
+          <ol>
+            <li>Laptop or phone</li>
+            <li>WireGuard VPN<small>the only way in for administration</small></li>
+            <li>DNS<small>Blocky filters unwanted domains, Unbound resolves recursively</small></li>
+            <li>SSH<small>not exposed to the internet at all</small></li>
+          </ol>
+        </div>
+      </div>
+      <div class="host">
+        <strong>Raspberry Pi 5, Debian 12</strong>
+        <small>two 2 TB drives in RAID 1, services managed with systemd, automated backups</small>
+      </div>
+    </figure>
+
+    <h3>Things I set up and maintain</h3>
+    <ul class="notes">
+      <li>Remote administration only through the VPN, so SSH never faces the internet.</li>
+      <li>Network-wide DNS filtering for every device connected to the VPN.</li>
+      <li>A Minecraft server for friends, run as a systemd service with backups every six hours and rotation. Other people reach its files through SFTP in a chroot jail with TOTP two-factor login.</li>
+      <li>A self-hosted Git server (Forgejo) where my configuration files and projects live.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="other">
+    <h2 id="other">Other projects</h2>
+    <dl>
+      <dt>Modified 3D printer</dt>
+      <dd>An Ender 3 Pro rebuilt around a BTT SKR Mini E3 v3 board running Klipper, with a Raspberry Pi 4 host and the Mainsail web interface. I converted the extruder to direct drive myself and added a BLTouch bed-leveling sensor.</dd>
+      <dt>Linux workstation</dt>
+      <dd>Arch Linux with Hyprland and a Neovim setup I configured from scratch, kept in a dotfiles repository managed with GNU Stow. The system uses btrfs snapshots that can be rolled back from the boot menu, on a ThinkPad flashed with open-source coreboot firmware.</dd>
+    </dl>
+  </section>
+
+  <section aria-labelledby="background">
+    <h2 id="background">Background</h2>
+    <dl>
+      <dt>Politecnico di Bari <span class="when">2024 – now</span></dt>
+      <dd>Bachelor's in Computer and Automation Engineering, after switching from Electronic Engineering and Internet Technologies in 2026.</dd>
+      <dt>ITT "Enrico Fermi", Francavilla Fontana <span class="when">2019 – 2024</span></dt>
+      <dd>Technical diploma in Computer Science and Telecommunications, final grade 96/100.</dd>
+      <dt>Bakery, Manduria <span class="when">summer seasons, 2021 – 2026</span></dt>
+      <dd>Seasonal work alongside my studies: warehouse first, then counter service and kitchen help, and the cash register in my last season.</dd>
+      <dt>Languages</dt>
+      <dd>Italian and Russian (native), English (Cambridge B2 First).</dd>
+    </dl>
+  </section>
+
+  <footer>
+    <p>This page is a single HTML file served by Nginx from the server described above.</p>
+  </footer>
+</main>
+</body>
+</html>
